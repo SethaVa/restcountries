@@ -1,7 +1,44 @@
+import { DataTable } from "@/components/table/data-table";
+import useFetch from "@/hooks/useFetch";
 import { HomeIcon, Package2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { columns } from "./components/Columns";
+
+interface IState {
+  isLoading: boolean;
+  apiData: any;
+  status: any;
+  serverError: any;
+}
 
 export default function Home() {
+  const [{ apiData, isLoading, serverError }]: any = useFetch(
+    "https://restcountries.com/v3.1/all"
+  );
+
+  if (isLoading) return null;
+  const getDisplayNativeName = (nativeName: any) => {
+    if (!nativeName) return "";
+
+    let result = [];
+    for (const key in nativeName) {
+      result.push(`${nativeName[key]?.common} (${key})`);
+    }
+
+    return result.join(", ");
+  };
+
+  const formattedData = (apiData || []).map((x: any) => ({
+    officialName: x?.name?.official || "",
+    cca2: x.cca2,
+    cca3: x.cca3,
+    nativeName: getDisplayNativeName(x?.name?.nativeName),
+    altSpellings: x.altSpellings.join(", "),
+    idd: `(${x?.idd?.root}) ${
+      x?.idd?.suffixes?.length ? x?.idd?.suffixes.join(", ") : " - "
+    }`,
+  }));
+
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-gray-100/40 lg:block ">
@@ -23,6 +60,7 @@ export default function Home() {
               </Link>
             </nav>
           </div>
+          c
         </div>
       </div>
       <div className="flex flex-col">
@@ -37,8 +75,8 @@ export default function Home() {
           <div className="w-full flex-1"></div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div className="flex items-center">
-            <h1 className="font-semibold text-lg md:text-2xl">Table</h1>
+          <div className="">
+            <DataTable columns={columns} data={formattedData} />
           </div>
         </main>
       </div>
