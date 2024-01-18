@@ -29,6 +29,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { Loader2 } from "lucide-react";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -61,6 +62,11 @@ export function DataTable<TData, TValue>({
       rowSelection,
       columnFilters,
     },
+    initialState: {
+      pagination: {
+        pageSize: 25,
+      },
+    },
     enableRowSelection: true,
     onRowSelectionChange: onRowSelectionChange,
     onSortingChange: setSorting,
@@ -76,8 +82,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md">
-        <Table className="relative w-full overflow-auto">
+      <div className="rounded-md h-[45rem] overflow-auto">
+        <Table className="relative w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -155,6 +161,7 @@ export function DataTable<TData, TValue>({
           )}
         </Table>
       </div>
+      <DataTablePagination table={table} />
     </div>
   );
 }

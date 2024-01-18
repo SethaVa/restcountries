@@ -39,6 +39,8 @@ export default function Home() {
     }`,
   }));
 
+  console.log(formattedData.length);
+
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-gray-100/40 lg:block ">
