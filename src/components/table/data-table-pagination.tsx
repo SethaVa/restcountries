@@ -3,13 +3,6 @@ import { Table } from "@tanstack/react-table";
 
 // Components
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import {
   MdKeyboardArrowLeft,
   MdKeyboardDoubleArrowLeft,
   MdOutlineKeyboardArrowRight,

@@ -12,12 +12,12 @@ import {
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
+import Fuse from "fuse.js";
 
 // Components
 import {
@@ -30,6 +30,7 @@ import {
 } from "../ui/table";
 import { Loader2 } from "lucide-react";
 import { DataTablePagination } from "./data-table-pagination";
+import { DataTableSearch } from "./data-table-search";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -53,8 +54,29 @@ export function DataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
+  const [query, setQuery] = React.useState("");
+
+  const fuse = React.useMemo(
+    () =>
+      new Fuse(data, {
+        keys: ["officialName"],
+        threshold: 0.6,
+      }),
+    [data, columns]
+  );
+
+  const filteredData = React.useMemo(() => {
+    if (query && data) {
+      const searchResults = fuse.search(query);
+      console.log(searchResults.map((result) => result.item));
+      return searchResults.map((result) => result.item);
+    } else {
+      return data;
+    }
+  }, [data, fuse, query]);
+
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     state: {
       sorting,
@@ -73,15 +95,21 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setQuery(value);
+    table.getColumn("officialName")?.setFilterValue(value);
+  };
+
   return (
     <div className="space-y-4">
+      <DataTableSearch table={table} handleInputChange={handleInputChange} />
       <div className="rounded-md h-[45rem] overflow-auto">
         <Table className="relative w-full">
           <TableHeader>

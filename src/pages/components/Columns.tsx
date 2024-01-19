@@ -16,9 +16,6 @@ export const columns: ColumnDef<CountryColumn>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Country Name" />
     ),
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
     cell: ({ row }) => <div className="">{row.getValue("officialName")}</div>,
   },
   {
