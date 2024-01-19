@@ -68,7 +68,6 @@ export function DataTable<TData, TValue>({
   const filteredData = React.useMemo(() => {
     if (query && data) {
       const searchResults = fuse.search(query);
-      console.log(searchResults.map((result) => result.item));
       return searchResults.map((result) => result.item);
     } else {
       return data;

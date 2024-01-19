@@ -16,10 +16,12 @@ export const columns: ColumnDef<CountryColumn>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Country Name" />
     ),
+    sortDescFirst: true,
     cell: ({ row }) => <div className="">{row.getValue("officialName")}</div>,
   },
   {
     accessorKey: "cca2",
+    enableSorting: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="2 character Country Code" />
     ),
@@ -29,6 +31,7 @@ export const columns: ColumnDef<CountryColumn>[] = [
   },
   {
     accessorKey: "cca3",
+    enableSorting: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="3 character Country Code" />
     ),
@@ -38,6 +41,7 @@ export const columns: ColumnDef<CountryColumn>[] = [
   },
   {
     accessorKey: "nativeName",
+    enableSorting: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Native Country Name" />
     ),
@@ -45,6 +49,7 @@ export const columns: ColumnDef<CountryColumn>[] = [
   },
   {
     accessorKey: "altSpellings",
+    enableSorting: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Alternative Country Name" />
     ),
@@ -56,6 +61,7 @@ export const columns: ColumnDef<CountryColumn>[] = [
   },
   {
     accessorKey: "idd",
+    enableSorting: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Country Calling Codes " />
     ),
