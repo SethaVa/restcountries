@@ -19,7 +19,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         description=""
         isOpen={isOpenModal}
         onClose={() => setIsOpenModal(false)}
-        className="w-full max-w-xl bg-white"
+        className=" w-[70rem] bg-white"
       >
         <CountryForm initialData={data} />
       </Modal>

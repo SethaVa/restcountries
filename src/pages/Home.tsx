@@ -31,6 +31,8 @@ export default function Home() {
   };
 
   const formattedData = (apiData || []).map((x: any) => ({
+    flagPng: x?.flags?.png,
+    flagAlt: x?.flags?.alt,
     officialName: x?.name?.official || "",
     cca2: x.cca2,
     cca3: x.cca3,
@@ -40,6 +42,8 @@ export default function Home() {
       x?.idd?.suffixes?.length ? x?.idd?.suffixes.join(", ") : " - "
     }`,
   }));
+
+  console.log(formattedData);
 
   return (
     <>

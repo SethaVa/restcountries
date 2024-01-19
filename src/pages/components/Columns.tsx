@@ -9,9 +9,25 @@ export type CountryColumn = {
   nativeName: string;
   altSpellings: string;
   idd: string;
+  flagAlt: string;
+  flagPng: string;
 };
 
 export const columns: ColumnDef<CountryColumn>[] = [
+  {
+    accessorKey: "flagPng",
+    enableSorting: false,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Flags" />
+    ),
+    cell: ({ row }) => (
+      <img
+        className="w-10"
+        alt={row.getValue("flagAlt")}
+        src={row.getValue("flagPng")}
+      />
+    ),
+  },
   {
     accessorKey: "officialName",
     header: ({ column }) => (

@@ -41,28 +41,22 @@ const CountryForm: React.FC<CountryFormProps> = ({ initialData }) => {
   });
 
   return (
-    <Form {...form}>
-      <form className="space-y-8 w-full">
-        <FormField
-          control={form.control}
-          name="officialName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Country Name</FormLabel>
-              <FormControl>
-                <Input className="rounded-md" readOnly {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <div className="md:grid md:grid-cols-2 gap-8">
+      <div className="flex items-center justify-center p-6">
+        <img
+          className=" object-cover w-full"
+          alt={initialData.flagAlt}
+          src={initialData.flagPng}
         />
-        <div className="md:grid md:grid-cols-2 gap-8">
+      </div>
+      <Form {...form}>
+        <form className="space-y-8 w-full">
           <FormField
             control={form.control}
-            name="cca2"
+            name="officialName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>2 character Country Code</FormLabel>
+                <FormLabel>Country Name</FormLabel>
                 <FormControl>
                   <Input className="rounded-md" readOnly {...field} />
                 </FormControl>
@@ -70,61 +64,77 @@ const CountryForm: React.FC<CountryFormProps> = ({ initialData }) => {
               </FormItem>
             )}
           />
+          <div className="md:grid md:grid-cols-2 gap-8">
+            <FormField
+              control={form.control}
+              name="cca2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>2 character Country Code</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-md" readOnly {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="cca3"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>3 character Country Code</FormLabel>
+                  <FormControl>
+                    <Input className="rounded-md" readOnly {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
-            name="cca3"
+            name="nativeName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>3 character Country Code</FormLabel>
+                <FormLabel>Native Country Name</FormLabel>
                 <FormControl>
-                  <Input className="rounded-md" readOnly {...field} />
+                  <Textarea className="resize-none" readOnly {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
-        <FormField
-          control={form.control}
-          name="nativeName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Native Country Name</FormLabel>
-              <FormControl>
-                <Textarea className="resize-none" readOnly {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="altSpellings"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Alternative Country Name</FormLabel>
-              <FormControl>
-                <Textarea className="resize-none" readOnly {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="idd"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Country Calling Codes</FormLabel>
-              <FormControl>
-                <Textarea className="resize-none" readOnly {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="altSpellings"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Alternative Country Name</FormLabel>
+                <FormControl>
+                  <Textarea className="resize-none" readOnly {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="idd"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Photo</FormLabel>
+                <FormControl>
+                  <Textarea className="resize-none" readOnly {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+    </div>
   );
 };
 
