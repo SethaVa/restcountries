@@ -23,7 +23,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       >
         <CountryForm initialData={data} />
       </Modal>
-      <div className=" cursor-pointer" onClick={() => setIsOpenModal(true)}>
+      <div
+        className=" cursor-pointer w-full"
+        onClick={() => setIsOpenModal(true)}
+      >
         {data.officialName}
       </div>
     </>

@@ -21,8 +21,8 @@ const formSchema = z.object({
   officialName: z.string(),
   cca2: z.string(),
   cca3: z.string(),
-  nativeName: z.string(),
-  altSpellings: z.string(),
+  nativeNameStr: z.string(),
+  altSpellingsStr: z.string(),
   idd: z.string(),
 });
 
@@ -95,7 +95,7 @@ const CountryForm: React.FC<CountryFormProps> = ({ initialData }) => {
 
           <FormField
             control={form.control}
-            name="nativeName"
+            name="nativeNameStr"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Native Country Name</FormLabel>
@@ -108,7 +108,7 @@ const CountryForm: React.FC<CountryFormProps> = ({ initialData }) => {
           />
           <FormField
             control={form.control}
-            name="altSpellings"
+            name="altSpellingsStr"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Alternative Country Name</FormLabel>

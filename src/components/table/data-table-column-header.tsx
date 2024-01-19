@@ -32,11 +32,11 @@ export function DataTableColumnHeader<TData, TValue>({
     }
   };
   return (
-    <div className={cn("flex items-center space-x-2 z-50 bg-white", className)}>
+    <div className={cn("flex items-center space-x-2 z-50", className)}>
       <Button
         variant="ghost"
         size="sm"
-        className="-ml-3 h-8 data-[state=open]:bg-accent"
+        className="-ml-3 h-8 data-[state=open]:bg-accent "
         onClick={column.getToggleSortingHandler()}
       >
         <span>{title}</span>

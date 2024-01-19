@@ -5,6 +5,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   OnChangeFn,
+  Row,
   RowSelectionState,
   SortingState,
   VisibilityState,
@@ -18,6 +19,7 @@ import {
 } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 import Fuse from "fuse.js";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 // Components
 import {
@@ -31,6 +33,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableSearch } from "./data-table-search";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -52,6 +55,8 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const tableContainerRef = React.useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const [query, setQuery] = React.useState("");
@@ -109,8 +114,8 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       <DataTableSearch table={table} handleInputChange={handleInputChange} />
-      <div className="rounded-md h-[45rem] overflow-auto">
-        <Table className="relative w-full">
+      <ScrollArea className="h-[40rem] rounded-md border">
+        <Table className="w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -140,10 +145,7 @@ export function DataTable<TData, TValue>({
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    // data-state={row?.getIsSelected() && "selected"}
-                  >
+                  <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
@@ -187,7 +189,8 @@ export function DataTable<TData, TValue>({
             </TableBody>
           )}
         </Table>
-      </div>
+      </ScrollArea>
+
       <DataTablePagination table={table} />
     </div>
   );
