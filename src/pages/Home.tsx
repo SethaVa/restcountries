@@ -1,8 +1,10 @@
 import { DataTable } from "@/components/table/data-table";
 import useFetch from "@/hooks/useFetch";
-import { HomeIcon, Package2 } from "lucide-react";
+import { Package2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { columns } from "./components/Columns";
+
+import { Loader } from "./components/Loader";
 
 interface IState {
   isLoading: boolean;
@@ -16,7 +18,6 @@ export default function Home() {
     "https://restcountries.com/v3.1/all"
   );
 
-  if (isLoading) return null;
   const getDisplayNativeNameArr = (nativeName: any) => {
     if (!nativeName) return [];
 
@@ -56,7 +57,13 @@ export default function Home() {
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           <div className=" overflow-hidden">
-            <DataTable columns={columns} data={formattedData} />
+            {isLoading ? (
+              <DataTable columns={columns} data={formattedData} />
+            ) : (
+              <div className="h-[40rem] flex items-center justify-center">
+                <Loader />
+              </div>
+            )}
           </div>
         </main>
       </div>

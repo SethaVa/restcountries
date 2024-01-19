@@ -21,16 +21,6 @@ export function DataTableColumnHeader<TData, TValue>({
     return <div className={cn(className)}>{title}</div>;
   }
 
-  const onSort = () => {
-    console.log(column.getIsSorted());
-    if (column.getIsSorted() !== "desc" && column.getIsSorted() !== "asc") {
-      column.toggleSorting(false);
-    } else if (column.getIsSorted() == "asc") {
-      column.toggleSorting(true);
-    } else if (column.getIsSorted() === "desc") {
-      column.toggleSorting(undefined);
-    }
-  };
   return (
     <div className={cn("flex items-center space-x-2 z-50", className)}>
       <Button
