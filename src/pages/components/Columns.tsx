@@ -1,5 +1,6 @@
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
 import { ColumnDef } from "@tanstack/react-table";
+import { CellAction } from "./CellAction";
 
 export type CountryColumn = {
   officialName: string;
@@ -17,7 +18,7 @@ export const columns: ColumnDef<CountryColumn>[] = [
       <DataTableColumnHeader column={column} title="Country Name" />
     ),
     sortDescFirst: true,
-    cell: ({ row }) => <div className="">{row.getValue("officialName")}</div>,
+    cell: ({ row }) => <CellAction data={row.original} />,
   },
   {
     accessorKey: "cca2",
