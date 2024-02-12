@@ -9,6 +9,15 @@ import {
   MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
 import { Button } from "../ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../ui/pagination";
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
@@ -25,44 +34,67 @@ export function DataTablePagination<TData>({
           Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount()}
         </div>
-        <div className="flex items-center space-x-2">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => table.previousPage()}
+                className="cursor-pointer"
+              />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => table.nextPage()}
+                className="cursor-pointer"
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+
+        {/* <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden w-8 h-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to first page</span>
-            <MdKeyboardDoubleArrowLeft className="h-4 w-4" />
+            <MdKeyboardDoubleArrowLeft className="w-4 h-4" />
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="w-8 h-8 p-0"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to previous page</span>
-            <MdKeyboardArrowLeft className="h-4 w-4" />
+            <MdKeyboardArrowLeft className="w-4 h-4" />
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="w-8 h-8 p-0"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to next page</span>
-            <MdOutlineKeyboardArrowRight className="h-4 w-4" />
+            <MdOutlineKeyboardArrowRight className="w-4 h-4" />
           </Button>
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden w-8 h-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to last page</span>
-            <MdOutlineKeyboardDoubleArrowRight className="h-4 w-4" />
+            <MdOutlineKeyboardDoubleArrowRight className="w-4 h-4" />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

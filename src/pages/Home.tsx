@@ -31,7 +31,7 @@ export default function Home() {
 
   const formattedData = (apiData || []).map((x: any) => ({
     flagPng: x?.flags?.png,
-    flagAlt: x?.flags?.alt,
+    flagAlt: x?.flags?.alt || "",
     officialName: x?.name?.official || "",
     cca2: x.cca2,
     cca3: x.cca3,
@@ -50,14 +50,14 @@ export default function Home() {
       <div className="flex flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 ">
           <Link className="flex items-center gap-2 font-semibold" to="#">
-            <Package2 className="h-6 w-6" />
+            <Package2 className="w-6 h-6" />
             <span className="">Countries Catalog</span>
           </Link>
-          <div className="w-full flex-1"></div>
+          <div className="flex-1 w-full"></div>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div className=" overflow-hidden">
-            {isLoading ? (
+        <main className="flex flex-col flex-1 gap-4 p-4 md:gap-8 md:p-6">
+          <div className="overflow-hidden ">
+            {!isLoading ? (
               <DataTable columns={columns} data={formattedData} />
             ) : (
               <div className="h-[40rem] flex items-center justify-center">
